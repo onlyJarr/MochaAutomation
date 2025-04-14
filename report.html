@@ -553,13 +553,13 @@ body {
                     <li><span id="toggle-passes" class="toggle-passes">show failures only</span></li>
                 </ul>
                 <ul class="mocha-stats">
-                    <li class="passes">passes: <em>2</em></li>
+                    <li class="passes">passes: <em>4</em></li>
                     <li class="pending">pending: <em>0</em></li>
                     <li class="failures">failures: <em>0</em></li>
-                    <li class="duration">duration: <em>610ms</em></li>
+                    <li class="duration">duration: <em>1.2s</em></li>
                 </ul>
             </div>
-            <ul id="report"><li class="suite"><h1>API Test</h1><ul><li class="test pass slow"><h2>READ - single user<span class="duration">198ms</span></h2><pre><code>async function () {
+            <ul id="report"><li class="suite"><h1>API Test</h1><ul><li class="test pass slow"><h2>READ - single page<span class="duration">246ms</span></h2><pre><code>async function () {
         const response = await fetch(&#x60;${URL}/api/users?page=2&#x60;);
         const schema = skemaget;
         expect(response.status).to.equal(200);
@@ -568,7 +568,16 @@ body {
         const validate = ajv.compile(schema);
         const valid = validate(data);
         expect(valid ).to.be.true;
-    }</code></pre></li><li class="test pass slow"><h2>CREATE - single user<span class="duration">409ms</span></h2><pre><code>async function () {
+    }</code></pre></li><li class="test pass slow"><h2>READ - single user<span class="duration">169ms</span></h2><pre><code>async function () {
+        const response = await fetch(&#x60;${URL}/api/users/2&#x60;);
+        const schema = getSingleUser;
+        expect(response.status).to.equal(200);
+        const data = await response.json();
+        const ajv = new Ajv();
+        const validate = ajv.compile(schema);
+        const valid = validate(data);
+        expect(valid ).to.be.true;
+    }</code></pre></li><li class="test pass slow"><h2>CREATE - single user<span class="duration">439ms</span></h2><pre><code>async function () {
         const schema = skemapost;
         const newPost = {
             name: &#x22;morpheus&#x22;,
@@ -582,6 +591,26 @@ body {
             body: JSON.stringify(newPost),
         });
         expect(response.status).to.equal(201);
+        const data = await response.json();
+        const ajv = new Ajv();
+        const validate = ajv.compile(schema);
+        const valid = validate(data);
+        expect(valid ).to.be.true;
+        
+    }</code></pre></li><li class="test pass slow"><h2>REGISTER - single user<span class="duration">423ms</span></h2><pre><code>async function () {
+        const schema = registpost;
+        const newPost = {
+            &#x22;email&#x22;: &#x22;eve.holt@reqres.in&#x22;,
+            &#x22;password&#x22;: &#x22;pistol&#x22;
+        }
+        const response = await fetch(&#x60;${URL}/api/register&#x60;, {
+            method: &#x22;POST&#x22;,
+            headers: {
+                &#x22;Content-Type&#x22;: &#x22;application/json&#x22;,
+            },
+            body: JSON.stringify(newPost),
+        });
+        expect(response.status).to.equal(200);
         const data = await response.json();
         const ajv = new Ajv();
         const validate = ajv.compile(schema);

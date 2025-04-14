@@ -22,6 +22,22 @@ export const skemapost = {
     ]
   }
 
+  export const registpost = {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "token": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "id",
+      "token"
+    ]
+  }
+
   export const skemaget = {
     "type": "object",
     "properties": {
@@ -230,3 +246,54 @@ export const skemapost = {
     ]
   }
   
+  export const getSingleUser = {
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "email": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "first_name",
+          "last_name",
+          "avatar"
+        ]
+      },
+      "support": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "url",
+          "text"
+        ]
+      }
+    },
+    "required": [
+      "data",
+      "support"
+    ]
+  }
