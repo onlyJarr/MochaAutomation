@@ -1,0 +1,21 @@
+{
+  "name": "mochacu",
+  "version": "1.0.0",
+  "description": "Ini deskripsi project nya",
+  "type": "module",
+  "scripts": {
+    "start": "mocha tests --recursive --timeout 5000 --reporter spec",
+    "html-report": "mocha tests --recursive --reporter mocha-simple-html-reporter --timeout 5000 --reporter-options output=report.html",
+    "report-json": "mocha tests --recursive --reporter json --timeout 5000 --reporter-options output=report.json"
+    
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.1",
+    "ajv": "^8.12.0"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "chai": "^4.3.8",
+    "mocha-simple-html-reporter": "^2.0.0"
+  }
+}
